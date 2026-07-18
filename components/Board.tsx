@@ -55,6 +55,14 @@ export default function Board() {
     return map;
   }, [issues]);
 
+  const numByIssue = useMemo(() => {
+    const map = new Map<string, number>();
+    [...issues]
+      .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+      .forEach((issue, idx) => map.set(issue.id, idx + 1));
+    return map;
+  }, [issues]);
+
   const findContainer = (id: string): Status | undefined => {
     if (STATUS_KEYS.includes(id as Status)) return id as Status;
     return issues.find((i) => i.id === id)?.status;
@@ -127,12 +135,12 @@ export default function Board() {
     <>
       <form className="new-issue" onSubmit={handleAdd}>
         <input
-          placeholder="Add a new issue..."
+          placeholder="Enter a new matter for the record…"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <button type="submit" disabled={!title.trim()}>
-          Add
+          Enter
         </button>
       </form>
 
@@ -152,6 +160,7 @@ export default function Board() {
                 status={s.key}
                 label={s.label}
                 issues={byStatus[s.key]}
+                numByIssue={numByIssue}
                 onStatusChange={handleStatusChange}
               />
             ))}

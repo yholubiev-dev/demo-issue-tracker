@@ -7,10 +7,11 @@ import { STATUSES } from "@/lib/types";
 
 interface Props {
   issue: Issue;
+  num: number;
   onStatusChange: (id: string, status: Status) => void;
 }
 
-export default function IssueCard({ issue, onStatusChange }: Props) {
+export default function IssueCard({ issue, num, onStatusChange }: Props) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
     useSortable({ id: issue.id });
 
@@ -27,18 +28,22 @@ export default function IssueCard({ issue, onStatusChange }: Props) {
       {...attributes}
       {...listeners}
     >
-      <div className="title">{issue.title}</div>
-      <select
-        value={issue.status}
-        onPointerDown={(e) => e.stopPropagation()}
-        onChange={(e) => onStatusChange(issue.id, e.target.value as Status)}
-      >
-        {STATUSES.map((s) => (
-          <option key={s.key} value={s.key}>
-            {s.label}
-          </option>
-        ))}
-      </select>
+      <div className="card-num">№ {num}</div>
+      <div className="card-title">{issue.title}</div>
+      <div className="card-disposition">
+        <span className="card-disposition-label">Disposition</span>
+        <select
+          value={issue.status}
+          onPointerDown={(e) => e.stopPropagation()}
+          onChange={(e) => onStatusChange(issue.id, e.target.value as Status)}
+        >
+          {STATUSES.map((s) => (
+            <option key={s.key} value={s.key}>
+              {s.label}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
   );
 }
