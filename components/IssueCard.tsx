@@ -4,13 +4,15 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import type { Issue, Status } from "@/lib/types";
 import { STATUSES } from "@/lib/types";
+import { THEME } from "@/lib/theme";
 
 interface Props {
   issue: Issue;
   onStatusChange: (id: string, status: Status) => void;
+  onRemove: (id: string) => void;
 }
 
-export default function IssueCard({ issue, onStatusChange }: Props) {
+export default function IssueCard({ issue, onStatusChange, onRemove }: Props) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
     useSortable({ id: issue.id });
 
@@ -28,6 +30,13 @@ export default function IssueCard({ issue, onStatusChange }: Props) {
       {...listeners}
     >
       <div className="title">{issue.title}</div>
+      <div
+        className="remove"
+        onPointerDown={(e) => e.stopPropagation()}
+        onClick={() => onRemove(issue.id)}
+      >
+        ✕
+      </div>
       <select
         value={issue.status}
         onPointerDown={(e) => e.stopPropagation()}
@@ -35,7 +44,7 @@ export default function IssueCard({ issue, onStatusChange }: Props) {
       >
         {STATUSES.map((s) => (
           <option key={s.key} value={s.key}>
-            {s.label}
+            {THEME[s.key].name}
           </option>
         ))}
       </select>

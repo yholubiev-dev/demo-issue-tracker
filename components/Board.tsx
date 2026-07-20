@@ -80,6 +80,11 @@ export default function Board() {
     setIssues((prev) => prev.map((i) => (i.id === id ? updated : i)));
   }
 
+  async function handleRemove(id: string) {
+    await api(`/api/issues/${id}`, { method: "DELETE" });
+    setIssues((prev) => prev.filter((i) => i.id !== id));
+  }
+
   function handleDragOver(event: DragOverEvent) {
     const { active, over } = event;
     if (!over) return;
@@ -127,12 +132,12 @@ export default function Board() {
     <>
       <form className="new-issue" onSubmit={handleAdd}>
         <input
-          placeholder="Add a new issue..."
+          placeholder="Cast a new soul into the fire..."
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <button type="submit" disabled={!title.trim()}>
-          Add
+          Damn It
         </button>
       </form>
 
@@ -150,9 +155,9 @@ export default function Board() {
               <Column
                 key={s.key}
                 status={s.key}
-                label={s.label}
                 issues={byStatus[s.key]}
                 onStatusChange={handleStatusChange}
+                onRemove={handleRemove}
               />
             ))}
           </div>
