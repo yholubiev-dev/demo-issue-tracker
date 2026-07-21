@@ -1,4 +1,4 @@
-export type Status = "backlog" | "todo" | "in_progress" | "done";
+export type Status = "backlog" | "todo" | "in_progress" | "testing" | "done";
 
 export interface Issue {
   id: string;
@@ -13,5 +13,6 @@ export const STATUSES: { key: Status; label: string }[] = [
   { key: "backlog", label: "Backlog" },
   { key: "todo", label: "Todo" },
   { key: "in_progress", label: "In Progress" },
+  { key: "testing", label: "Testing" },
   { key: "done", label: "Done" },
 ];

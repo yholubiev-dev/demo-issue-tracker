@@ -47,6 +47,7 @@ export default function Board() {
       backlog: [],
       todo: [],
       in_progress: [],
+      testing: [],
       done: [],
     };
     [...issues]
