@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Runs before `git commit`: has docs-writer sync README/CLAUDE.md/CHANGELOG
+# and any inline JSDoc against the staged diff, then stages the result
+# (including JSDoc edits to files that were already staged) into the
+# same commit.
+
+STAGED_FILES=$(git diff --cached --name-only)
+
+printf '%s' "Update the documentation for this project (README.md, CLAUDE.md, CHANGELOG.md, and relevant inline JSDoc) to reflect the changes staged for this commit. Only look at git diff --cached, nothing else. If it is empty, make no edits and stop. Do not reach into commit history or reconcile unrelated pre-existing staleness -- if you notice any, mention it in your summary but do not edit for it." \
+  | claude -p --agent docs-writer --permission-mode acceptEdits --allowedTools "Read Edit Grep Glob Bash(git diff:*) Bash(git status:*)"
+
+git add README.md CLAUDE.md CHANGELOG.md 2>/dev/null
+
+echo "$STAGED_FILES" | while IFS= read -r f; do
+  [ -n "$f" ] && git add "$f" 2>/dev/null
+done
+
+true
