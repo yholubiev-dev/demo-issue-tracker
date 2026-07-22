@@ -5,8 +5,8 @@ A minimal kanban-style issue tracker built with Next.js. Issues are stored in me
 ## Setup
 
 ```bash
-bun install
-bun run dev
+npm install
+npm run dev
 ```
 
 Open http://localhost:3000.
@@ -15,6 +15,7 @@ Open http://localhost:3000.
 
 - `GET /api/issues`
 - `POST /api/issues` — `{ title, description?, status? }`
+- `GET /api/issues/:id`
 - `PATCH /api/issues/:id` — `{ title?, description?, status?, order? }`
 - `DELETE /api/issues/:id`
 - `PUT /api/columns/:status/reorder` — `{ orderedIds: string[] }`
