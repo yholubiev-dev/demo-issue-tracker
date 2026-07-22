@@ -43,6 +43,8 @@ export default function Board() {
   }, []);
 
   const byStatus = useMemo(() => {
+    // NB: these keys are listed by hand and are NOT derived from STATUSES —
+    // adding/removing a status in lib/types.ts requires updating this map too.
     const map: Record<Status, Issue[]> = {
       backlog: [],
       todo: [],

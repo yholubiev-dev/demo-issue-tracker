@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "The Register of Issues",
+  title: "The Registrator of Issues",
   description: "A faithful ledger of matters outstanding & matters resolved",
 };
 
