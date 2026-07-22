@@ -4,6 +4,7 @@
 
 ### Added
 - New "Testing" kanban column between In Progress and Done.
+- `GET /api/issues/random` endpoint, returning a random issue (404 if none exist).
 
 ### Changed
 - Page title changed to "The Registrator of Issues".

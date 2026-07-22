@@ -27,10 +27,13 @@ components/IssueCard — single card with inline status dropdown
 |--------|------|-------------|
 | GET | `/api/issues` | list all issues |
 | POST | `/api/issues` | create issue (`{ title, status?, description? }`) |
+| GET | `/api/issues/random` | get one random issue (404 if store is empty) |
 | GET | `/api/issues/[id]` | get one |
 | PATCH | `/api/issues/[id]` | update fields |
 | DELETE | `/api/issues/[id]` | delete |
 | PUT | `/api/columns/[status]/reorder` | reorder a column (`{ orderedIds: string[] }`) |
+
+`app/api/issues/random/route.ts` is a static sibling of `app/api/issues/[id]/route.ts`; Next.js resolves the static segment first, so `random` is never captured as an `:id`. If more static sub-paths are added under `/api/issues/`, keep this in mind.
 
 ### Drag-and-drop
 

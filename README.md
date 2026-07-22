@@ -15,6 +15,7 @@ Open http://localhost:3000.
 
 - `GET /api/issues`
 - `POST /api/issues` — `{ title, description?, status? }`
+- `GET /api/issues/random` — a random issue
 - `GET /api/issues/:id`
 - `PATCH /api/issues/:id` — `{ title?, description?, status?, order? }`
 - `DELETE /api/issues/:id`
