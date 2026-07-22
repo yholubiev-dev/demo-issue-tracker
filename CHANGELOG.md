@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+- New "Testing" kanban column between In Progress and Done.
+
+### Changed
+- Page title changed to "The Registrator of Issues".
+
 ## [0.1.2] - 2026-07-20
 
 ### Changed

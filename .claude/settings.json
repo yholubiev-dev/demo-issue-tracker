@@ -1,0 +1,18 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(git commit*)",
+            "command": "printf '%s' \"Update the documentation for this project (README.md, CLAUDE.md, CHANGELOG.md, and relevant inline JSDoc) to reflect the changes staged for this commit. Only look at git diff --cached, nothing else. If it is empty, make no edits and stop. Do not reach into commit history or reconcile unrelated pre-existing staleness -- if you notice any, mention it in your summary but do not edit for it.\" | claude -p --agent docs-writer --permission-mode acceptEdits --allowedTools \"Read Edit Grep Glob Bash(git diff:*) Bash(git status:*)\"; git add README.md CLAUDE.md CHANGELOG.md 2>/dev/null; true",
+            "timeout": 180,
+            "statusMessage": "docs-writer: updating README/CLAUDE.md/CHANGELOG before commit..."
+          }
+        ]
+      }
+    ]
+  }
+}

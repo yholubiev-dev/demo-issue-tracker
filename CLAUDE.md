@@ -38,4 +38,4 @@ components/IssueCard — single card with inline status dropdown
 
 ### Statuses
 
-Four fixed statuses defined in `lib/types.ts`: `backlog → todo → in_progress → done`. Adding a new status requires updating the `Status` union and the `STATUSES` array — the rest of the code derives from that array.
+Five fixed statuses defined in `lib/types.ts`: `backlog → todo → in_progress → testing → done`. Adding a new status requires updating the `Status` union and the `STATUSES` array in `lib/types.ts`, plus the `byStatus` record initializer in `components/Board.tsx` (its keys are constructed by hand, not derived from `STATUSES`). Everything else — column rendering, the status dropdown, drag-and-drop — derives from the `STATUSES` array.
